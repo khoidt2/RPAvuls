@@ -1,13 +1,12 @@
 package com.rpa.vuls.proccess;
 
+import com.rpa.vuls.models.VulInfo;
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -16,11 +15,32 @@ public class GenDoc {
 
     public void proccess() {
 
-        XWPFDocument doc = new XWPFDocument();
+        try {
+            XWPFDocument doc = new XWPFDocument();
+            XWPFParagraph ds = doc.createParagraph();
+            ds.setAlignment(ParagraphAlignment.CENTER);
+            XWPFRun dsrun = ds.createRun();
+            dsrun.setBold(true);
+            dsrun.setFontSize(16);
+            dsrun.setText("DANH SÁCH LỖI AN TOÀN THÔNG TIN");
+            dsrun.setFontFamily("Times New Roman");
 
+            writeFile("E:\\projects\\RPA\\out\\report.docx", doc);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void addVulInfo() {
+    private void addVulInfo(VulInfo vul, XWPFDocument doc) {
+        //line 1 - vulner name: BUG_xx: VUL_NAME
+        XWPFParagraph pVul = doc.createParagraph();
+        XWPFRun rVul = pVul.createRun();
+        rVul.setFontFamily("Times New Roman");
+        rVul.setFontSize(13);
+        rVul.setBold(true);
+        rVul.setText(vul.getVulnerability());
+
+        //line 2 - level
 
     }
 
@@ -38,6 +58,13 @@ public class GenDoc {
 
     private void insertImage() {
 
+    }
+
+    private void writeFile(String pathSave, XWPFDocument doc) throws IOException {
+        //TODO: check path save is exits
+        FileOutputStream out = new FileOutputStream(pathSave);
+        doc.write(out);
+        out.close();
     }
 
      public void test() throws IOException {
