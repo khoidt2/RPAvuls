@@ -1,0 +1,43 @@
+{
+  "project": "HSSK",
+  "reports": {
+    "XSS": {
+      "vulInfo": {
+        "vulname": "SQL",
+        "severity": "High",
+        "thread": "Lay data",
+        "howfix": "su dung prepare statement"
+      },
+      "endpoints": [
+        {
+          "endpoint": "/api/v1/viewuser",
+          "describer": "xem nguoi dung",
+          "image": null,
+          "request": "GET /api/v1/viewuser"
+        }
+      ]
+    },
+    "SQL": {
+      "vulInfo": {
+        "vulname": "SQL",
+        "severity": "High",
+        "thread": "Lay data",
+        "howfix": "su dung prepare statement"
+      },
+      "endpoints": [
+        {
+          "endpoint": "/api/v1/createuser",
+          "describer": "tao nguoi dung",
+          "image": null,
+          "request": "POST /api/v1/createuser"
+        },
+        {
+          "endpoint": "/api/v1/createbook",
+          "describer": "tao quyen sach",
+          "image": null,
+          "request": "POST /api/v1/createbook"
+        }
+      ]
+    }
+  }
+}
